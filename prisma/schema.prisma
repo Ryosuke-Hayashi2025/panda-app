@@ -12,3 +12,128 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum IconType {
+  grandma
+  grandpa
+  mom
+  dad
+  boy_1
+  boy_2
+  girl_1
+  girl_2
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  supabaseUserId String   @unique
+  email          String   @unique
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  members        Member[]
+
+  @@map("users")
+}
+
+model Member {
+  id                     Int                     @id @default(autoincrement())
+  userId                 Int                     @map("user_id")
+  name                   String
+  iconType               IconType
+  createdAt              DateTime                @default(now()) @map("created_at")
+  updatedAt              DateTime                @updatedAt @map("updated_at")
+  user                   User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  holdingStocks          HoldingStock[]
+  pastPerformanceDetails PastPerformanceDetail[]
+
+  @@map("members")
+}
+
+enum MarketCategory {
+  prime
+  standard
+  growth
+}
+
+model Stock {
+  id               Int            @id @default(autoincrement())
+  code             String         @unique
+  name             String
+  marketCategory   MarketCategory @map("market_category")
+  industryCategory String         @map("industry_category")
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+  holdingStocks    HoldingStock[]
+
+  @@map("stocks")
+}
+
+enum AccountType {
+  nisa
+  ippan
+  tokutei
+}
+
+model HoldingStock {
+  id                Int         @id @default(autoincrement())
+  memberId          Int         @map("member_id")
+  stockId           Int         @map("stock_id")
+  holdingStartMonth String?     @map("holding_start_month")
+  holdingQuantity   Int         @map("holding_quantity")
+  accountType       AccountType
+  memo              String?
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @updatedAt @map("updated_at")
+
+  member        Member         @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  stock         Stock          @relation(fields: [stockId], references: [id], onDelete: Cascade)
+  dividendInfos DividendInfo[]
+
+  @@map("holding_stocks")
+}
+
+enum DividendType {
+  final
+  midterm
+}
+
+model DividendInfo {
+  id             Int          @id @default(autoincrement())
+  holdingStockId Int          @map("holding_stock_id")
+  dividendType   DividendType @map("dividend_type")
+  paymentMonth   Int          @map("payment_month")
+  isEligible     Boolean
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+
+  holdingStock HoldingStock @relation(fields: [holdingStockId], references: [id], onDelete: Cascade)
+
+  @@unique([holdingStockId, dividendType, paymentMonth])
+  @@map("dividend_info")
+}
+
+model PastPerformanceDetail {
+  id                Int      @id @default(autoincrement())
+  memberId          Int      @map("member_id")
+  pastPerformanceId Int      @map("past_performance_id")
+  dividendAmount    Int      @map("dividend_amount")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  member          Member          @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  pastPerformance PastPerformance @relation(fields: [pastPerformanceId], references: [id], onDelete: Cascade)
+
+  @@unique([memberId, pastPerformanceId])
+  @@map("past_performance_details")
+}
+
+model PastPerformance {
+  id                     Int                     @id @default(autoincrement())
+  fiscalYear             Int                     @unique
+  memo                   String?
+  createdAt              DateTime                @default(now()) @map("created_at")
+  updatedAt              DateTime                @updatedAt @map("updated_at")
+  pastPerformanceDetails PastPerformanceDetail[]
+
+  @@map("past_performances")
+}
