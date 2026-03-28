@@ -3,12 +3,9 @@
 import { supabase } from "@/app/_libs/supabase";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useForm, FieldErrors } from "react-hook-form";
-
-type FormData = {
-  email: string;
-  password: string;
-};
+import { useForm } from "react-hook-form";
+import { AuthFormData } from "../_types/AuthFormData";
+import { AuthForm } from "@/app/_components/AuthForm";
 
 export default function Page() {
   // 既定値を準備
@@ -21,14 +18,14 @@ export default function Page() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({
+  } = useForm<AuthFormData>({
     defaultValues,
   });
 
   const router = useRouter();
 
   // サブミット時の処理
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: AuthFormData) => {
     const { error } = await supabase.auth.signInWithPassword({
       email: data.email,
       password: data.password,
@@ -40,86 +37,19 @@ export default function Page() {
       router.replace("/dashboard");
     }
   };
-  const onError = (err: FieldErrors<FormData>) => {
-    console.log(err);
-  };
 
   return (
     <div className="flex justify-center min-h-screen items-center bg-gray-100">
       <div className="w-full max-w-sm bg-white rounded-2xl shadow-md px-8 py-10">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold">ログイン</h1>
+        <div>
+          <AuthForm
+            mode="login"
+            onSubmit={handleSubmit(onSubmit)}
+            isSubmitting={isSubmitting}
+            register={register}
+            errors={errors}
+          />
         </div>
-        <form
-          onSubmit={handleSubmit(onSubmit, onError)}
-          className="space-y-4 w-full "
-        >
-          <div>
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              メールアドレス
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              placeholder="name@company.com"
-              {...register("email", {
-                required: "メールアドレスは必須入力です",
-                maxLength: {
-                  value: 50,
-                  message: "メールアドレスは50文字以内にしてください",
-                },
-                pattern: {
-                  value: /^[\w\-.]+@[\w\-.]+\.[a-zA-Z]{2,}$/,
-                  message: "メールアドレスの形式が不正です",
-                },
-              })}
-            />
-            <div className="text-red-500 text-sm min-h-[20px]">
-              {errors.email?.message}
-            </div>
-          </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              パスワード
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              placeholder="・・・・・・・・"
-              {...register("password", {
-                required: "パスワードは必須入力です",
-                minLength: {
-                  value: 8,
-                  message: "パスワードは8文字以上にしてください",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "パスワードは20文字以内にしてください",
-                },
-              })}
-            />
-            <div className="text-red-500 text-sm min-h-[20px]">
-              {errors.password?.message}
-            </div>
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "ログイン中" : "ログイン"}
-            </button>
-          </div>
-        </form>
         <p className="text-center text-sm text-gray-500 mt-6">
           パスワードを忘れた方は
           <Link
