@@ -55,6 +55,7 @@ export default function Page() {
             type="password"
             id="password"
             placeholder="・・・・・・・・"
+            disabled={isSubmitting}
             register={register("password", {
               required: "パスワードは必須入力です",
               minLength: {
@@ -77,6 +78,7 @@ export default function Page() {
             type="password"
             id="confirmPassword"
             placeholder="・・・・・・・・"
+            disabled={isSubmitting}
             register={register("confirmPassword", {
               required: "確認用パスワードは必須入力です",
               minLength: {

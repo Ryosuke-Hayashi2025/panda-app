@@ -49,6 +49,7 @@ export default function Page() {
             type="email"
             id="email"
             placeholder="name@company.com"
+            disabled={isSubmitting}
             register={register("email", {
               required: "メールアドレスは必須入力です",
               maxLength: {
