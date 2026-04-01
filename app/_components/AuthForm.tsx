@@ -32,6 +32,7 @@ export const AuthForm: React.FC<Props> = ({
         type="email"
         id="email"
         placeholder="name@company.com"
+        disabled={isSubmitting}
         register={register("email", {
           required: "メールアドレスは必須入力です",
           maxLength: {
@@ -50,6 +51,7 @@ export const AuthForm: React.FC<Props> = ({
         type="password"
         id="password"
         placeholder="・・・・・・・・"
+        disabled={isSubmitting}
         register={register("password", {
           required: "パスワードは必須入力です",
           minLength: {
@@ -59,6 +61,10 @@ export const AuthForm: React.FC<Props> = ({
           maxLength: {
             value: 20,
             message: "パスワードは20文字以内にしてください",
+          },
+          pattern: {
+            value: /^[ -~]+$/,
+            message: "パスワードは半角文字で入力してください",
           },
         })}
         error={errors.password?.message}
