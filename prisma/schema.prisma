@@ -98,13 +98,14 @@ enum DividendType {
 }
 
 model DividendInfo {
-  id             Int          @id @default(autoincrement())
-  holdingStockId Int          @map("holding_stock_id")
-  dividendType   DividendType @map("dividend_type")
-  paymentMonth   Int          @map("payment_month")
-  isEligible     Boolean
-  createdAt      DateTime     @default(now()) @map("created_at")
-  updatedAt      DateTime     @updatedAt @map("updated_at")
+  id               Int          @id @default(autoincrement())
+  holdingStockId   Int          @map("holding_stock_id")
+  dividendType     DividendType @map("dividend_type")
+  dividendPerShare Int?         @map("dividend_per_share")
+  paymentMonth     Int          @map("payment_month")
+  isEligible       Boolean
+  createdAt        DateTime     @default(now()) @map("created_at")
+  updatedAt        DateTime     @updatedAt @map("updated_at")
 
   holdingStock HoldingStock @relation(fields: [holdingStockId], references: [id], onDelete: Cascade)
 

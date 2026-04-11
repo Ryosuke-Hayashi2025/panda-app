@@ -131,6 +131,7 @@ export const DividendInfoScalarFieldEnum = {
   id: 'id',
   holdingStockId: 'holdingStockId',
   dividendType: 'dividendType',
+  dividendPerShare: 'dividendPerShare',
   paymentMonth: 'paymentMonth',
   isEligible: 'isEligible',
   createdAt: 'createdAt',
