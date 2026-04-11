@@ -29,12 +29,14 @@ export type AggregateDividendInfo = {
 export type DividendInfoAvgAggregateOutputType = {
   id: number | null
   holdingStockId: number | null
+  dividendPerShare: number | null
   paymentMonth: number | null
 }
 
 export type DividendInfoSumAggregateOutputType = {
   id: number | null
   holdingStockId: number | null
+  dividendPerShare: number | null
   paymentMonth: number | null
 }
 
@@ -42,6 +44,7 @@ export type DividendInfoMinAggregateOutputType = {
   id: number | null
   holdingStockId: number | null
   dividendType: $Enums.DividendType | null
+  dividendPerShare: number | null
   paymentMonth: number | null
   isEligible: boolean | null
   createdAt: Date | null
@@ -52,6 +55,7 @@ export type DividendInfoMaxAggregateOutputType = {
   id: number | null
   holdingStockId: number | null
   dividendType: $Enums.DividendType | null
+  dividendPerShare: number | null
   paymentMonth: number | null
   isEligible: boolean | null
   createdAt: Date | null
@@ -62,6 +66,7 @@ export type DividendInfoCountAggregateOutputType = {
   id: number
   holdingStockId: number
   dividendType: number
+  dividendPerShare: number
   paymentMonth: number
   isEligible: number
   createdAt: number
@@ -73,12 +78,14 @@ export type DividendInfoCountAggregateOutputType = {
 export type DividendInfoAvgAggregateInputType = {
   id?: true
   holdingStockId?: true
+  dividendPerShare?: true
   paymentMonth?: true
 }
 
 export type DividendInfoSumAggregateInputType = {
   id?: true
   holdingStockId?: true
+  dividendPerShare?: true
   paymentMonth?: true
 }
 
@@ -86,6 +93,7 @@ export type DividendInfoMinAggregateInputType = {
   id?: true
   holdingStockId?: true
   dividendType?: true
+  dividendPerShare?: true
   paymentMonth?: true
   isEligible?: true
   createdAt?: true
@@ -96,6 +104,7 @@ export type DividendInfoMaxAggregateInputType = {
   id?: true
   holdingStockId?: true
   dividendType?: true
+  dividendPerShare?: true
   paymentMonth?: true
   isEligible?: true
   createdAt?: true
@@ -106,6 +115,7 @@ export type DividendInfoCountAggregateInputType = {
   id?: true
   holdingStockId?: true
   dividendType?: true
+  dividendPerShare?: true
   paymentMonth?: true
   isEligible?: true
   createdAt?: true
@@ -203,6 +213,7 @@ export type DividendInfoGroupByOutputType = {
   id: number
   holdingStockId: number
   dividendType: $Enums.DividendType
+  dividendPerShare: number | null
   paymentMonth: number
   isEligible: boolean
   createdAt: Date
@@ -236,6 +247,7 @@ export type DividendInfoWhereInput = {
   id?: Prisma.IntFilter<"DividendInfo"> | number
   holdingStockId?: Prisma.IntFilter<"DividendInfo"> | number
   dividendType?: Prisma.EnumDividendTypeFilter<"DividendInfo"> | $Enums.DividendType
+  dividendPerShare?: Prisma.IntNullableFilter<"DividendInfo"> | number | null
   paymentMonth?: Prisma.IntFilter<"DividendInfo"> | number
   isEligible?: Prisma.BoolFilter<"DividendInfo"> | boolean
   createdAt?: Prisma.DateTimeFilter<"DividendInfo"> | Date | string
@@ -247,6 +259,7 @@ export type DividendInfoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   holdingStockId?: Prisma.SortOrder
   dividendType?: Prisma.SortOrder
+  dividendPerShare?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentMonth?: Prisma.SortOrder
   isEligible?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -262,6 +275,7 @@ export type DividendInfoWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.DividendInfoWhereInput | Prisma.DividendInfoWhereInput[]
   holdingStockId?: Prisma.IntFilter<"DividendInfo"> | number
   dividendType?: Prisma.EnumDividendTypeFilter<"DividendInfo"> | $Enums.DividendType
+  dividendPerShare?: Prisma.IntNullableFilter<"DividendInfo"> | number | null
   paymentMonth?: Prisma.IntFilter<"DividendInfo"> | number
   isEligible?: Prisma.BoolFilter<"DividendInfo"> | boolean
   createdAt?: Prisma.DateTimeFilter<"DividendInfo"> | Date | string
@@ -273,6 +287,7 @@ export type DividendInfoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   holdingStockId?: Prisma.SortOrder
   dividendType?: Prisma.SortOrder
+  dividendPerShare?: Prisma.SortOrderInput | Prisma.SortOrder
   paymentMonth?: Prisma.SortOrder
   isEligible?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -291,6 +306,7 @@ export type DividendInfoScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"DividendInfo"> | number
   holdingStockId?: Prisma.IntWithAggregatesFilter<"DividendInfo"> | number
   dividendType?: Prisma.EnumDividendTypeWithAggregatesFilter<"DividendInfo"> | $Enums.DividendType
+  dividendPerShare?: Prisma.IntNullableWithAggregatesFilter<"DividendInfo"> | number | null
   paymentMonth?: Prisma.IntWithAggregatesFilter<"DividendInfo"> | number
   isEligible?: Prisma.BoolWithAggregatesFilter<"DividendInfo"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DividendInfo"> | Date | string
@@ -299,6 +315,7 @@ export type DividendInfoScalarWhereWithAggregatesInput = {
 
 export type DividendInfoCreateInput = {
   dividendType: $Enums.DividendType
+  dividendPerShare?: number | null
   paymentMonth: number
   isEligible: boolean
   createdAt?: Date | string
@@ -310,6 +327,7 @@ export type DividendInfoUncheckedCreateInput = {
   id?: number
   holdingStockId: number
   dividendType: $Enums.DividendType
+  dividendPerShare?: number | null
   paymentMonth: number
   isEligible: boolean
   createdAt?: Date | string
@@ -318,6 +336,7 @@ export type DividendInfoUncheckedCreateInput = {
 
 export type DividendInfoUpdateInput = {
   dividendType?: Prisma.EnumDividendTypeFieldUpdateOperationsInput | $Enums.DividendType
+  dividendPerShare?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentMonth?: Prisma.IntFieldUpdateOperationsInput | number
   isEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -329,6 +348,7 @@ export type DividendInfoUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   holdingStockId?: Prisma.IntFieldUpdateOperationsInput | number
   dividendType?: Prisma.EnumDividendTypeFieldUpdateOperationsInput | $Enums.DividendType
+  dividendPerShare?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentMonth?: Prisma.IntFieldUpdateOperationsInput | number
   isEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -339,6 +359,7 @@ export type DividendInfoCreateManyInput = {
   id?: number
   holdingStockId: number
   dividendType: $Enums.DividendType
+  dividendPerShare?: number | null
   paymentMonth: number
   isEligible: boolean
   createdAt?: Date | string
@@ -347,6 +368,7 @@ export type DividendInfoCreateManyInput = {
 
 export type DividendInfoUpdateManyMutationInput = {
   dividendType?: Prisma.EnumDividendTypeFieldUpdateOperationsInput | $Enums.DividendType
+  dividendPerShare?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentMonth?: Prisma.IntFieldUpdateOperationsInput | number
   isEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -357,6 +379,7 @@ export type DividendInfoUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   holdingStockId?: Prisma.IntFieldUpdateOperationsInput | number
   dividendType?: Prisma.EnumDividendTypeFieldUpdateOperationsInput | $Enums.DividendType
+  dividendPerShare?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentMonth?: Prisma.IntFieldUpdateOperationsInput | number
   isEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -383,6 +406,7 @@ export type DividendInfoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   holdingStockId?: Prisma.SortOrder
   dividendType?: Prisma.SortOrder
+  dividendPerShare?: Prisma.SortOrder
   paymentMonth?: Prisma.SortOrder
   isEligible?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -392,6 +416,7 @@ export type DividendInfoCountOrderByAggregateInput = {
 export type DividendInfoAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   holdingStockId?: Prisma.SortOrder
+  dividendPerShare?: Prisma.SortOrder
   paymentMonth?: Prisma.SortOrder
 }
 
@@ -399,6 +424,7 @@ export type DividendInfoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   holdingStockId?: Prisma.SortOrder
   dividendType?: Prisma.SortOrder
+  dividendPerShare?: Prisma.SortOrder
   paymentMonth?: Prisma.SortOrder
   isEligible?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -409,6 +435,7 @@ export type DividendInfoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   holdingStockId?: Prisma.SortOrder
   dividendType?: Prisma.SortOrder
+  dividendPerShare?: Prisma.SortOrder
   paymentMonth?: Prisma.SortOrder
   isEligible?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -418,6 +445,7 @@ export type DividendInfoMinOrderByAggregateInput = {
 export type DividendInfoSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   holdingStockId?: Prisma.SortOrder
+  dividendPerShare?: Prisma.SortOrder
   paymentMonth?: Prisma.SortOrder
 }
 
@@ -467,12 +495,21 @@ export type EnumDividendTypeFieldUpdateOperationsInput = {
   set?: $Enums.DividendType
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
 }
 
 export type DividendInfoCreateWithoutHoldingStockInput = {
   dividendType: $Enums.DividendType
+  dividendPerShare?: number | null
   paymentMonth: number
   isEligible: boolean
   createdAt?: Date | string
@@ -482,6 +519,7 @@ export type DividendInfoCreateWithoutHoldingStockInput = {
 export type DividendInfoUncheckedCreateWithoutHoldingStockInput = {
   id?: number
   dividendType: $Enums.DividendType
+  dividendPerShare?: number | null
   paymentMonth: number
   isEligible: boolean
   createdAt?: Date | string
@@ -521,6 +559,7 @@ export type DividendInfoScalarWhereInput = {
   id?: Prisma.IntFilter<"DividendInfo"> | number
   holdingStockId?: Prisma.IntFilter<"DividendInfo"> | number
   dividendType?: Prisma.EnumDividendTypeFilter<"DividendInfo"> | $Enums.DividendType
+  dividendPerShare?: Prisma.IntNullableFilter<"DividendInfo"> | number | null
   paymentMonth?: Prisma.IntFilter<"DividendInfo"> | number
   isEligible?: Prisma.BoolFilter<"DividendInfo"> | boolean
   createdAt?: Prisma.DateTimeFilter<"DividendInfo"> | Date | string
@@ -530,6 +569,7 @@ export type DividendInfoScalarWhereInput = {
 export type DividendInfoCreateManyHoldingStockInput = {
   id?: number
   dividendType: $Enums.DividendType
+  dividendPerShare?: number | null
   paymentMonth: number
   isEligible: boolean
   createdAt?: Date | string
@@ -538,6 +578,7 @@ export type DividendInfoCreateManyHoldingStockInput = {
 
 export type DividendInfoUpdateWithoutHoldingStockInput = {
   dividendType?: Prisma.EnumDividendTypeFieldUpdateOperationsInput | $Enums.DividendType
+  dividendPerShare?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentMonth?: Prisma.IntFieldUpdateOperationsInput | number
   isEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -547,6 +588,7 @@ export type DividendInfoUpdateWithoutHoldingStockInput = {
 export type DividendInfoUncheckedUpdateWithoutHoldingStockInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   dividendType?: Prisma.EnumDividendTypeFieldUpdateOperationsInput | $Enums.DividendType
+  dividendPerShare?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentMonth?: Prisma.IntFieldUpdateOperationsInput | number
   isEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -556,6 +598,7 @@ export type DividendInfoUncheckedUpdateWithoutHoldingStockInput = {
 export type DividendInfoUncheckedUpdateManyWithoutHoldingStockInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   dividendType?: Prisma.EnumDividendTypeFieldUpdateOperationsInput | $Enums.DividendType
+  dividendPerShare?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   paymentMonth?: Prisma.IntFieldUpdateOperationsInput | number
   isEligible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -568,6 +611,7 @@ export type DividendInfoSelect<ExtArgs extends runtime.Types.Extensions.Internal
   id?: boolean
   holdingStockId?: boolean
   dividendType?: boolean
+  dividendPerShare?: boolean
   paymentMonth?: boolean
   isEligible?: boolean
   createdAt?: boolean
@@ -579,6 +623,7 @@ export type DividendInfoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   holdingStockId?: boolean
   dividendType?: boolean
+  dividendPerShare?: boolean
   paymentMonth?: boolean
   isEligible?: boolean
   createdAt?: boolean
@@ -590,6 +635,7 @@ export type DividendInfoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   holdingStockId?: boolean
   dividendType?: boolean
+  dividendPerShare?: boolean
   paymentMonth?: boolean
   isEligible?: boolean
   createdAt?: boolean
@@ -601,13 +647,14 @@ export type DividendInfoSelectScalar = {
   id?: boolean
   holdingStockId?: boolean
   dividendType?: boolean
+  dividendPerShare?: boolean
   paymentMonth?: boolean
   isEligible?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type DividendInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "holdingStockId" | "dividendType" | "paymentMonth" | "isEligible" | "createdAt" | "updatedAt", ExtArgs["result"]["dividendInfo"]>
+export type DividendInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "holdingStockId" | "dividendType" | "dividendPerShare" | "paymentMonth" | "isEligible" | "createdAt" | "updatedAt", ExtArgs["result"]["dividendInfo"]>
 export type DividendInfoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   holdingStock?: boolean | Prisma.HoldingStockDefaultArgs<ExtArgs>
 }
@@ -627,6 +674,7 @@ export type $DividendInfoPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: number
     holdingStockId: number
     dividendType: $Enums.DividendType
+    dividendPerShare: number | null
     paymentMonth: number
     isEligible: boolean
     createdAt: Date
@@ -1058,6 +1106,7 @@ export interface DividendInfoFieldRefs {
   readonly id: Prisma.FieldRef<"DividendInfo", 'Int'>
   readonly holdingStockId: Prisma.FieldRef<"DividendInfo", 'Int'>
   readonly dividendType: Prisma.FieldRef<"DividendInfo", 'DividendType'>
+  readonly dividendPerShare: Prisma.FieldRef<"DividendInfo", 'Int'>
   readonly paymentMonth: Prisma.FieldRef<"DividendInfo", 'Int'>
   readonly isEligible: Prisma.FieldRef<"DividendInfo", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"DividendInfo", 'DateTime'>
